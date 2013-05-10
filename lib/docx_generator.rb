@@ -1,5 +1,5 @@
 require "docx_generator/version"
+require 'docx_generator/document'
 
 module DocxGenerator
-  # Your code goes here...
 end

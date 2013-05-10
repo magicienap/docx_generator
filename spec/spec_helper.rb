@@ -1,0 +1,1 @@
+require 'docx_generator'
