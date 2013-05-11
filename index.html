@@ -62,11 +62,20 @@
 
 <h2>Usage</h2>
 
-<p>To create a new docx file, just type:</p>
+<p>To create a new docx file and save it, just type:</p>
 
 <div class="highlight"><pre><span class="nb">require</span> <span class="s1">'docx_generator'</span>
 
 <span class="ss">DocxGenerator</span><span class="p">:</span><span class="ss">:Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">"filename"</span><span class="p">)</span><span class="o">.</span><span class="n">save</span> <span class="c1"># Will save the document to filename.docx</span>
+</pre></div>
+
+<p>To create a paragraph and add formatted text to it:</p>
+
+<div class="highlight"><pre><span class="nb">require</span> <span class="s1">'docx_generator'</span>
+
+<span class="n">document</span> <span class="o">=</span> <span class="ss">DocxGenerator</span><span class="p">:</span><span class="ss">:Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">"filename"</span><span class="p">)</span>
+<span class="n">document</span><span class="o">.</span><span class="n">add_paragraph</span><span class="p">(</span><span class="s2">"Simple string of text and"</span><span class="p">,</span> <span class="n">document</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">"some formatted text"</span><span class="p">,</span> <span class="ss">bold</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">italics</span><span class="p">:</span> <span class="kp">true</span><span class="p">))</span> <span class="c1"># The fragments will be separated by a space when they will be rendered</span>
+<span class="n">document</span><span class="o">.</span><span class="n">save</span>
 </pre></div>
 
 <h2>Contributing</h2>
