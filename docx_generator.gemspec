@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["proulx.antoine@gmail.com"]
   spec.description   = %q{A gem to generate docx files.}
   spec.summary       = %q{A gem to generate docx files.}
-  spec.homepage      = "http://github.com/magicienap/docx_generator"
+  spec.homepage      = "http://magicienap.github.io/docx_generator"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
