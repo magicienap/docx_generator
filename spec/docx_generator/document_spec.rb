@@ -40,4 +40,24 @@ describe DocxGenerator::Document do
       end
     end
   end
+  
+  describe "#add_paragraph" do
+    let(:document) { DocxGenerator::Document.new("word") }
+    
+    before do
+      document.add_paragraph("The first characters", "and the last ones.").save
+    end
+
+    after do
+      File.delete("word.docx")
+    end
+  
+    it "adds a paragraph with the fragments supplied separated by a space" do # Space : an option
+      open_file("word/document.xml").should include("<w:p><w:r><w:t>The first characters</w:t></w:r><w:r><w:t xml:space=\"preserve\"> </w:t></w:r><w:r><w:t>and the last ones.</w:t></w:r></w:p>")
+    end
+    
+    it "returns the current document" do
+      document.add_paragraph(["The first characters", "and the last ones."]).should be(document)
+    end
+  end
 end

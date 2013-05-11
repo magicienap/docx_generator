@@ -1,1 +1,2 @@
-require 'docx_generator/word/word'
+require 'docx_generator/word/base'
+require 'docx_generator/word/extensions'

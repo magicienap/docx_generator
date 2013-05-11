@@ -21,6 +21,18 @@ module DocxGenerator
       end
     end
     
+    # text_fragments : Word::Text or String
+    def add_paragraph(*text_fragments)
+      content = []
+      text_fragments.each do |text|
+        content.push Word::Run.new({}, [ Word::Text.new({}, [text]) ])
+        content.push Word::Extensions.space
+      end
+      content.pop
+      @content.push Word::Paragraph.new({}, content)
+      self
+    end
+    
     private
     
       def generate_content_types
