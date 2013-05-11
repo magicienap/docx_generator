@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO
+To create a new docx file, just type:
+
+```ruby
+require 'docx_generator'
+
+DocxGenerator::Document.new("filename").save # Will save the document to filename.docx
+```
 
 ## Contributing
 
