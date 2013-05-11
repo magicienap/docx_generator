@@ -80,6 +80,7 @@ EOF
           when :bold then Word::Bold.new(value)
           when :italics then Word::Italics.new(value)
           when :underline then Word::Underline.new(value)
+          when :size then Word::Size.new(value)
         end
       end
   end

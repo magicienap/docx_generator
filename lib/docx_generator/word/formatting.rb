@@ -26,5 +26,12 @@ module DocxGenerator
         super("w:u", final_arguments)
       end
     end
+
+    class Size < Element
+      # size : The font size in points
+      def initialize(size)
+        super("w:sz", { "w:val" => "#{size}pt" })
+      end
+    end
   end
 end
