@@ -24,12 +24,24 @@ module DocxGenerator
     # text_fragments : Word::Text or String
     # Later: Paragraph Object, with Text Object
     def add_paragraph(*text_fragments)
+      arguments = {}
       content = []
       text_fragments.each do |text_fragment|
-        content.push(text_fragment.respond_to?(:generate) ? text_fragment : text(text_fragment))
-        content.push Word::Extensions.space
+        if text_fragment.respond_to?(:keys)
+          arguments = text_fragment
+        else
+          content.push(text_fragment.respond_to?(:generate) ? text_fragment : text(text_fragment))
+          content.push Word::Extensions.space
+        end
       end
       content.pop
+      if arguments.length != 0
+        options = []
+        arguments.each do |option, value|
+          options.push parse_paragraph_option(option, value)
+        end
+        content.unshift Word::ParagraphProperties.new({}, options)
+      end
       @content.push Word::Paragraph.new({}, content)
       self
     end
@@ -39,7 +51,7 @@ module DocxGenerator
       if arguments.length != 0
         options = []
         arguments.each do |option, value|
-          options.push parse_option(option, value)
+          options.push parse_text_option(option, value)
         end
         content.push Word::RunProperties.new({}, options)
       end
@@ -75,12 +87,18 @@ EOF
           [ Word::Body.new({}, @content) ]).to_s
       end
       
-      def parse_option(option, value)
+      def parse_text_option(option, value)
         case option
           when :bold then Word::Bold.new(value)
           when :italics then Word::Italics.new(value)
           when :underline then Word::Underline.new(value)
           when :size then Word::Size.new(value)
+        end
+      end
+
+      def parse_paragraph_option(option, value)
+        case option
+          when :alignment then Word::Alignment.new(value)
         end
       end
   end

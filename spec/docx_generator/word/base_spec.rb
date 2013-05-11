@@ -22,6 +22,13 @@ describe DocxGenerator::Word::Paragraph do
   end
 end
 
+describe DocxGenerator::Word::ParagraphProperties do
+  it "should render a w:pPr element" do
+    DocxGenerator::Word::ParagraphProperties.new.to_s.should eq("<w:pPr />")
+    DocxGenerator::Word::ParagraphProperties.new({}, ["Text"]).to_s.should eq("<w:pPr>Text</w:pPr>")
+  end
+end
+
 describe DocxGenerator::Word::Run do
   it "should render a w:r element" do
     DocxGenerator::Word::Run.new.to_s.should eq("<w:r />")

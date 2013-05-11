@@ -28,3 +28,9 @@ describe DocxGenerator::Word::Size do
     DocxGenerator::Word::Size.new(20).to_s.should eq("<w:sz w:val=\"20pt\" />")
   end
 end
+
+describe DocxGenerator::Word::Alignment do
+  it "should render a w:jc element" do
+    DocxGenerator::Word::Alignment.new("center").to_s.should eq("<w:jc w:val=\"center\" />")
+  end
+end

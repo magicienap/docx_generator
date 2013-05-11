@@ -17,6 +17,12 @@ module DocxGenerator
         super("w:p", attributes, content)
       end
     end
+
+    class ParagraphProperties < Element
+      def initialize(attributes = {}, content = [])
+        super("w:pPr", attributes, content)
+      end
+    end
     
     class Run < Element
       def initialize(attributes = {}, content = [])

@@ -33,5 +33,11 @@ module DocxGenerator
         super("w:sz", { "w:val" => "#{size}pt" })
       end
     end
+
+    class Alignment < Element
+      def initialize(value)
+        super("w:jc", { "w:val" => value })
+      end
+    end
   end
 end

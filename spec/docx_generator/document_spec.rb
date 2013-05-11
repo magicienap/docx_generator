@@ -62,6 +62,13 @@ describe DocxGenerator::Document do
     it "should return the current document" do
       document.add_paragraph(["The first characters", "and the last ones."]).should be(document)
     end
+
+    context "with styles" do
+      it "should align the paragraph" do
+        document.add_paragraph(document.text("The first characters"), "and the last ones.", alignment: "center").save
+        open_file("word/document.xml").should include("<w:p><w:pPr><w:jc w:val=\"center\" /></w:pPr><w:r><w:t>The first characters</w:t></w:r><w:r><w:t xml:space=\"preserve\"> </w:t></w:r><w:r><w:t>and the last ones.</w:t></w:r></w:p>")
+      end
+    end
   end
   
   describe "#text" do
