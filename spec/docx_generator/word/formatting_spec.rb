@@ -15,3 +15,10 @@ describe DocxGenerator::Word::Italics do
     DocxGenerator::Word::Italics.new(false).to_s.should eq("<w:i w:val=\"false\" />")
   end
 end
+
+describe DocxGenerator::Word::Underline do
+  it "should render a w:u element" do
+    DocxGenerator::Word::Underline.new.to_s.should eq("<w:u w:val=\"single\" />")
+    DocxGenerator::Word::Underline.new(style: "double").to_s.should eq("<w:u w:val=\"double\" />")
+  end
+end

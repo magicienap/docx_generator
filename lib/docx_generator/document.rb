@@ -79,6 +79,7 @@ EOF
         case option
           when :bold then Word::Bold.new(value)
           when :italics then Word::Italics.new(value)
+          when :underline then Word::Underline.new(value)
         end
       end
   end

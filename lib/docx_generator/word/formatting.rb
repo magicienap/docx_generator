@@ -13,5 +13,18 @@ module DocxGenerator
         super("w:i", arguments)
       end
     end
+
+    class Underline < Element
+      def initialize(arguments = { "w:val" => "single" })
+        final_arguments = {}
+        arguments.each do |option, value|
+          case option
+            when :style then final_arguments["w:val"] = value
+            else final_arguments[option] = value
+          end
+        end
+        super("w:u", final_arguments)
+      end
+    end
   end
 end

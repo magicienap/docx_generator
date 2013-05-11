@@ -77,6 +77,10 @@ describe DocxGenerator::Document do
       it "should return a text in italics" do
         DocxGenerator::Document.new("word").text("Text", italics: true).to_s.should eq("<w:r><w:rPr><w:i w:val=\"true\" /></w:rPr><w:t>Text</w:t></w:r>")
       end
+      
+      it "should return an underlined text" do
+        DocxGenerator::Document.new("word").text("Text", underline: { style: "single" }).to_s.should eq("<w:r><w:rPr><w:u w:val=\"single\" /></w:rPr><w:t>Text</w:t></w:r>")
+      end
     end
   end
 end
