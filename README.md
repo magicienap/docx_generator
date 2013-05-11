@@ -18,12 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-To create a new docx file, just type:
+To create a new docx file and save it, just type:
 
 ```ruby
 require 'docx_generator'
 
 DocxGenerator::Document.new("filename").save # Will save the document to filename.docx
+```
+
+To create a paragraph and add formatted text to it:
+
+```ruby
+require 'docx_generator'
+
+document = DocxGenerator::Document.new("filename")
+document.add_paragraph("Simple string of text and", document.text("some formatted text", bold: true, italics: true)) # The fragments will be separated by a space when they will be rendered
+document.save
 ```
 
 ## Contributing

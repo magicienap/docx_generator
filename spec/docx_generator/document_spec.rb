@@ -43,21 +43,40 @@ describe DocxGenerator::Document do
   
   describe "#add_paragraph" do
     let(:document) { DocxGenerator::Document.new("word") }
-    
-    before do
-      document.add_paragraph("The first characters", "and the last ones.").save
-    end
 
     after do
-      File.delete("word.docx")
+      File.delete("word.docx") if File.exists?("word.docx")
     end
   
-    it "adds a paragraph with the fragments supplied separated by a space" do # Space : an option
+    it "should add a paragraph with the fragments supplied separated by a space" do # Space : an option
+      document.add_paragraph("The first characters", "and the last ones.").save
       open_file("word/document.xml").should include("<w:p><w:r><w:t>The first characters</w:t></w:r><w:r><w:t xml:space=\"preserve\"> </w:t></w:r><w:r><w:t>and the last ones.</w:t></w:r></w:p>")
     end
     
-    it "returns the current document" do
+    # To be modified with bold and italics
+    it "should add a paragraph with a formatted text" do
+      document.add_paragraph(document.text("The first characters"), "and the last ones.").save
+      open_file("word/document.xml").should include("<w:p><w:r><w:t>The first characters</w:t></w:r><w:r><w:t xml:space=\"preserve\"> </w:t></w:r><w:r><w:t>and the last ones.</w:t></w:r></w:p>")
+    end
+    
+    it "should return the current document" do
       document.add_paragraph(["The first characters", "and the last ones."]).should be(document)
+    end
+  end
+  
+  describe "#text" do
+    it "should return a new Run with text in it" do
+      DocxGenerator::Document.new("word").text("Text").to_s.should eq("<w:r><w:t>Text</w:t></w:r>")
+    end
+    
+    context "with styles" do
+      it "should return a text in bold" do
+        DocxGenerator::Document.new("word").text("Text", bold: true).to_s.should eq("<w:r><w:rPr><w:b w:val=\"true\" /></w:rPr><w:t>Text</w:t></w:r>")
+      end
+      
+      it "should return a text in italics" do
+        DocxGenerator::Document.new("word").text("Text", italics: true).to_s.should eq("<w:r><w:rPr><w:i w:val=\"true\" /></w:rPr><w:t>Text</w:t></w:r>")
+      end
     end
   end
 end

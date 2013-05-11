@@ -22,15 +22,29 @@ module DocxGenerator
     end
     
     # text_fragments : Word::Text or String
+    # Later: Paragraph Object, with Text Object
     def add_paragraph(*text_fragments)
       content = []
-      text_fragments.each do |text|
-        content.push Word::Run.new({}, [ Word::Text.new({}, [text]) ])
+      text_fragments.each do |text_fragment|
+        content.push(text_fragment.respond_to?(:generate) ? text_fragment : text(text_fragment))
         content.push Word::Extensions.space
       end
       content.pop
       @content.push Word::Paragraph.new({}, content)
       self
+    end
+    
+    def text(text_fragment, arguments = {})
+      content = []
+      if arguments.length != 0
+        options = []
+        arguments.each do |option, value|
+          options.push parse_option(option, value)
+        end
+        content.push Word::RunProperties.new({}, options)
+      end
+      content.push Word::Text.new({}, [text_fragment])
+      Word::Run.new({}, content)
     end
     
     private
@@ -59,6 +73,13 @@ EOF
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
         Word::Document.new({ "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main" },
           [ Word::Body.new({}, @content) ]).to_s
+      end
+      
+      def parse_option(option, value)
+        case option
+          when :bold then Word::Bold.new(value)
+          when :italics then Word::Italics.new(value)
+        end
       end
   end
 end

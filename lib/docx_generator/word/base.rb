@@ -24,6 +24,12 @@ module DocxGenerator
       end
     end
     
+    class RunProperties < Element
+      def initialize(attributes = {}, content = [])
+        super("w:rPr", attributes, content)
+      end
+    end
+    
     class Text < Element
       def initialize(attributes = {}, content = [])
         super("w:t", attributes, content)

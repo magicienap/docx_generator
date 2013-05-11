@@ -29,6 +29,13 @@ describe DocxGenerator::Word::Run do
   end
 end
 
+describe DocxGenerator::Word::RunProperties do
+  it "should render a w:rPr element" do
+    DocxGenerator::Word::RunProperties.new.to_s.should eq("<w:rPr />")
+    DocxGenerator::Word::RunProperties.new({}, ["Text"]).to_s.should eq("<w:rPr>Text</w:rPr>")
+  end
+end
+
 describe DocxGenerator::Word::Text do
   it "should render a w:t element" do
     DocxGenerator::Word::Text.new.to_s.should eq("<w:t />")
