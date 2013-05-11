@@ -30,7 +30,7 @@ module DocxGenerator
     class Size < Element
       # size : The font size in points
       def initialize(size)
-        super("w:sz", { "w:val" => "#{size}pt" })
+        super("w:sz", { "w:val" => size*2 })
       end
     end
 

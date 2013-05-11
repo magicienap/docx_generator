@@ -25,7 +25,7 @@ end
 
 describe DocxGenerator::Word::Size do
   it "should render a w:sz element" do
-    DocxGenerator::Word::Size.new(20).to_s.should eq("<w:sz w:val=\"20pt\" />")
+    DocxGenerator::Word::Size.new(20).to_s.should eq("<w:sz w:val=\"40\" />")
   end
 end
 

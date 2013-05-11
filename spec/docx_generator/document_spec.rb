@@ -90,7 +90,7 @@ describe DocxGenerator::Document do
       end
 
       it "should return a text with a font size" do
-        DocxGenerator::Document.new("word").text("Text", size: 20).to_s.should eq("<w:r><w:rPr><w:sz w:val=\"20pt\" /></w:rPr><w:t>Text</w:t></w:r>")
+        DocxGenerator::Document.new("word").text("Text", size: 20).to_s.should eq("<w:r><w:rPr><w:sz w:val=\"40\" /></w:rPr><w:t>Text</w:t></w:r>")
       end
     end
   end
