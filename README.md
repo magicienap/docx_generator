@@ -36,6 +36,8 @@ document.add_paragraph("Simple string of text and", document.text("some formatte
 document.save
 ```
 
+You can see more examples in the `examples` directory.
+
 ## Contributing
 
 1. Fork it
@@ -43,3 +45,5 @@ document.save
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/557c5048ed09993a48f60e0aa0869ab3 "githalytics.com")](http://githalytics.com/magicienap/docx_generator)
