@@ -6,4 +6,10 @@ describe DocxGenerator::Word::Extensions do
       DocxGenerator::Word::Extensions.space.to_s.should eq("<w:r><w:t xml:space=\"preserve\"> </w:t></w:r>")
     end
   end
+
+  describe "newline" do
+    it "should render a newline" do
+      DocxGenerator::Word::Extensions.newline.to_s.should eq("<w:r><w:br /></w:r>")
+    end
+  end
 end

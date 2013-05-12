@@ -41,5 +41,11 @@ module DocxGenerator
         super("w:t", attributes, content)
       end
     end
+
+    class Break < Element
+      def initialize(attributes = {})
+        super("w:br", attributes)
+      end
+    end
   end
 end

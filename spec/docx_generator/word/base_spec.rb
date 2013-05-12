@@ -49,3 +49,9 @@ describe DocxGenerator::Word::Text do
     DocxGenerator::Word::Text.new({}, ["Text"]).to_s.should eq("<w:t>Text</w:t>")
   end
 end
+
+describe DocxGenerator::Word::Break do
+  it "should render a line break by default" do
+    DocxGenerator::Word::Break.new.to_s.should eq("<w:br />")
+  end
+end
