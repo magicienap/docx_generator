@@ -34,3 +34,9 @@ describe DocxGenerator::Word::Alignment do
     DocxGenerator::Word::Alignment.new("center").to_s.should eq("<w:jc w:val=\"center\" />")
   end
 end
+
+describe DocxGenerator::Word::VerticalAlign do
+  it "should render a w:vertAlign element" do
+    DocxGenerator::Word::VerticalAlign.new("superscript").to_s.should eq("<w:vertAlign w:val=\"superscript\" />")
+  end
+end

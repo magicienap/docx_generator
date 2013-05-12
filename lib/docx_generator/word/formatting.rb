@@ -39,5 +39,11 @@ module DocxGenerator
         super("w:jc", { "w:val" => value })
       end
     end
+
+    class VerticalAlign < Element
+      def initialize(value)
+        super("w:vertAlign", { "w:val" => value })
+      end
+    end
   end
 end

@@ -1,4 +1,9 @@
-# Version 0.0.2
+# Version 0.0.3
+
+- Add new lines
+- Support for superscripts and subscripts
+
+# Version 0.0.2 (2013-05-11)
 
 - Underline text
 - Change the font size

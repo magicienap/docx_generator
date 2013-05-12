@@ -93,6 +93,8 @@ EOF
           when :italics then Word::Italics.new(value)
           when :underline then Word::Underline.new(value)
           when :size then Word::Size.new(value)
+          when :superscript then Word::VerticalAlign.new("superscript")
+          when :subscript then Word::VerticalAlign.new("subscript")
         end
       end
 

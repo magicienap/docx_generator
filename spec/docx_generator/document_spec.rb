@@ -92,6 +92,14 @@ describe DocxGenerator::Document do
       it "should return a text with a font size" do
         DocxGenerator::Document.new("word").text("Text", size: 20).to_s.should eq("<w:r><w:rPr><w:sz w:val=\"40\" /></w:rPr><w:t>Text</w:t></w:r>")
       end
+
+      it "should render a text in superscript" do
+        DocxGenerator::Document.new("word").text("Text", superscript: true).to_s.should eq("<w:r><w:rPr><w:vertAlign w:val=\"superscript\" /></w:rPr><w:t>Text</w:t></w:r>")
+      end
+
+      it "should render a text in subscript" do
+        DocxGenerator::Document.new("word").text("Text", subscript: true).to_s.should eq("<w:r><w:rPr><w:vertAlign w:val=\"subscript\" /></w:rPr><w:t>Text</w:t></w:r>")
+      end
     end
   end
 end
