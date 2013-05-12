@@ -29,6 +29,8 @@ module DocxGenerator
       text_fragments.each do |text_fragment|
         if text_fragment.respond_to?(:keys)
           arguments = text_fragment
+        elsif text_fragment == :no_space
+          content.pop
         else
           content.push(text_fragment.respond_to?(:generate) ? text_fragment : text(text_fragment))
           content.push Word::Extensions.space

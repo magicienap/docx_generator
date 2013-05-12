@@ -48,9 +48,14 @@ describe DocxGenerator::Document do
       File.delete("word.docx") if File.exists?("word.docx")
     end
   
-    it "should add a paragraph with the fragments supplied separated by a space" do # Space : an option
+    it "should add a paragraph with the fragments supplied separated by a space" do
       document.add_paragraph("The first characters", "and the last ones.").save
       open_file("word/document.xml").should include("<w:p><w:r><w:t>The first characters</w:t></w:r><w:r><w:t xml:space=\"preserve\"> </w:t></w:r><w:r><w:t>and the last ones.</w:t></w:r></w:p>")
+    end
+
+    it "should not add a space when it encounters :no_space" do
+      document.add_paragraph("CO", :no_space, "2").save
+      open_file("word/document.xml").should include("<w:p><w:r><w:t>CO</w:t></w:r><w:r><w:t>2</w:t></w:r></w:p>")
     end
     
     # To be modified with bold and italics
