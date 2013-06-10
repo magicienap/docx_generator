@@ -3,7 +3,7 @@ module DocxGenerator
     attr_reader :filename
   
     def initialize(filename)
-      @filename = filename
+      @filename = filename + ".docx"
       @content = []
     end
     
@@ -12,12 +12,13 @@ module DocxGenerator
       rels = generate_rels
       document = generate_document
       
-      Zip::Archive.open(@filename + ".docx", Zip::CREATE | Zip::TRUNC) do |docx|
-        docx.add_dir('_rels')
-        docx.add_dir('word')
-        docx.add_buffer('[Content_Types].xml', content_types)
-        docx.add_buffer('_rels/.rels', rels)
-        docx.add_buffer('word/document.xml', document)
+      File.delete(@filename) if File.exists?(@filename)
+      Zip::ZipFile.open(@filename, Zip::ZipFile::CREATE) do |docx|
+        docx.mkdir('_rels')
+        docx.mkdir('word')
+        docx.get_output_stream('[Content_Types].xml') { |f| f.puts content_types }
+        docx.get_output_stream('_rels/.rels') { |f| f.puts rels }
+        docx.get_output_stream('word/document.xml') { |f| f.puts document }
       end
     end
     

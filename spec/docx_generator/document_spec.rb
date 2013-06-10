@@ -3,7 +3,7 @@ require 'spec_helper'
 describe DocxGenerator::Document do
   it "should create a new docx document with the filename specified" do
     document = DocxGenerator::Document.new("word")
-    document.filename.should eq("word")
+    document.filename.should eq("word.docx")
   end
   
   describe "#save" do
@@ -22,20 +22,20 @@ describe DocxGenerator::Document do
       before { DocxGenerator::Document.new("word").save }
     
       it "should generate a [Content_Types].xml file" do
-        Zip::Archive.open("word.docx") do |docx|
-          expect { docx.fopen("[Content_Types].xml") }.to_not raise_error
+        Zip::ZipFile.open("word.docx") do |docx|
+          expect { docx.read("[Content_Types].xml") }.to_not raise_error
         end
       end
       
       it "should generate a _rels/.rels file" do
-        Zip::Archive.open("word.docx") do |docx|
-          expect { docx.fopen("_rels/.rels") }.to_not raise_error
+        Zip::ZipFile.open("word.docx") do |docx|
+          expect { docx.read("_rels/.rels") }.to_not raise_error
         end
       end
       
       it "should generate a word/document.xml" do
-        Zip::Archive.open("word.docx") do |docx|
-          expect { docx.fopen("word/document.xml") }.to_not raise_error
+        Zip::ZipFile.open("word.docx") do |docx|
+          expect { docx.read("word/document.xml") }.to_not raise_error
         end
       end
     end
