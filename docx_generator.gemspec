@@ -27,4 +27,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "guard-bundler"
   spec.add_development_dependency "guard-rspec"
   spec.add_development_dependency "libnotify"
+
+  if RbConfig::CONFIG['target_os'] =~ /mswin|mingw/i
+    spec.add_development_dependency "wdm"
+    spec.add_development_dependency "win32console"
+  end
 end
