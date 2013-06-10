@@ -33,12 +33,12 @@ describe DocxGenerator::DSL::Document do
       end
     end
 
-    xit "should add a paragraph to the document" do
+    it "should add a paragraph to the document" do
       document = DocxGenerator::DSL::Document.new("word") do |doc|
         doc.paragraph { |par| }
         doc.save
       end
-      open_file("word/document.xml").should include("<w:p>")
+      open_file("word/document.xml").should include("<w:p")
     end
   end
 end
