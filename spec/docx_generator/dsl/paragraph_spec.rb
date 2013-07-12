@@ -41,4 +41,8 @@ describe DocxGenerator::DSL::Paragraph do
       open_file("word/document.xml").should include("<w:p><w:r><w:t>Title</w:t></w:r></w:p>")
     end
   end
+
+  describe "#alignment" do
+    it "should add the alignment property to the paragraph"
+  end
 end
