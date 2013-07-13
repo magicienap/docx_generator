@@ -73,7 +73,6 @@ module DocxGenerator
     class Break < Element
       # Create a new `w:br` element.
       # @param attributes [Hash] The attributes of the XML element. Check the specification of the `w:br` element for the possible attributes.
-      # @param content [Array] An array of the children of the XML element (other XML elements).
       def initialize(attributes = {})
         super("w:br", attributes)
       end

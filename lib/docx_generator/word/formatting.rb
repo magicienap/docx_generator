@@ -36,20 +36,28 @@ module DocxGenerator
       end
     end
 
+    # Represent the `w:sz` element from Office Open XML specification. This class should not be used directly by the users of the library.
     class Size < Element
-      # size : The font size in points
+      # Create a new `w:sz` element.
+      # @param size [Number] The size of the text (in points)
       def initialize(size)
         super("w:sz", { "w:val" => size*2 })
       end
     end
 
+    # Represent the `w:jc` element from Office Open XML specification. This class should not be used directly by the users of the library.
     class Alignment < Element
+      # Create a new `w:jc` element.
+      # @param value [String] The type of alignment. The list of all types of alignment can be found in the specification.
       def initialize(value)
         super("w:jc", { "w:val" => value })
       end
     end
 
+    # Represent the `w:vertAlign` element from Office Open XML specification. This class should not be used directly by the users of the library.
     class VerticalAlign < Element
+      # Create a new `w:vertAlign` element.
+      # @param value [String] The type of alignment. It should be `baseline`, `subscript` or `superscript`.
       def initialize(value)
         super("w:vertAlign", { "w:val" => value })
       end
