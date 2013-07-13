@@ -20,7 +20,7 @@ describe DocxGenerator::DSL::Text do
   describe "#generate" do
     it "should return a new Run with text in it" do
       text_fragment = DocxGenerator::DSL::Text.new("Title")
-      text_fragment.generate.to_s.should include("<w:r><w:t>Title</w:t></w:r>")
+      text_fragment.generate.to_s.should eq("<w:r><w:t>Title</w:t></w:r>")
     end
 
     context "with styles" do
@@ -59,7 +59,7 @@ describe DocxGenerator::DSL::Text do
   describe "#to_s" do
     it "should render the XML representation" do
       text_fragment = DocxGenerator::DSL::Text.new("Title")
-      text_fragment.to_s.should include("<w:r><w:t>Title</w:t></w:r>")
+      text_fragment.to_s.should eq("<w:r><w:t>Title</w:t></w:r>")
     end
   end
 end
