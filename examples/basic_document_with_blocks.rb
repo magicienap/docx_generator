@@ -3,7 +3,11 @@ require 'docx_generator'
 DocxGenerator::DSL::Document.new("basic_paragraph") do |doc|
   doc.paragraph do |par|
     par.alignment :center
-    par.text "Title", underline: { style: "double" }, size: 20
+    par.text "Title" do |t|
+      t.underline style: "double"
+      t.size 20
+      t.caps true
+    end
     # par.newline
   end
 
@@ -17,12 +21,12 @@ DocxGenerator::DSL::Document.new("basic_paragraph") do |doc|
   end
 
   doc.paragraph do |par|
-    par.text "Antoine", bold: true
+    par.text "Antoine", bold: true, small_caps: true
     par.text "How are you today?"
   end
 
   doc.paragraph do |par|
-    par.text "John", bold: true
+    par.text "John", bold: true, small_caps: true
     par.text "(whispering)", bold: true, italics: true
     par.text "How are you today?"
   end

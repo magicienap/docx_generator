@@ -12,6 +12,8 @@ module DocxGenerator
       # @option options [Integer] size The size of the text (in points).
       # @option options [Boolean] superscript If the text should be in superscript.
       # @option options [Boolean] subscript If the text should be in subscript.
+      # @option options [Boolean] caps If the text should be displayed in capital letters.
+      # @option options [Boolean] small_caps If the text should be displayed in small capital letters.
       def initialize(text_fragment, options = {}, &block)
         @text_fragment = text_fragment
         @options = options
@@ -54,6 +56,18 @@ module DocxGenerator
         @options[:subscript] = value
       end
 
+      # Set whether the text should be displayed in capital letters.
+      # @param value [Boolean] Whether the text should be displayed in capital letters.
+      def caps(value)
+        @options[:caps] = value
+      end
+
+      # Set whether the text should be displayed in small capital letters.
+      # @param value [Boolean] Whether the text should be displayed in small capital letters.
+      def small_caps(value)
+        @options[:small_caps] = value
+      end
+
       # Generate the XML element objects.
       # @return [DocxGenerator::Word::Run] A Word::Run object representing the text fragment.
       def generate
@@ -90,6 +104,8 @@ module DocxGenerator
             when :size then Word::Size.new(value)
             when :superscript then Word::VerticalAlign.new("superscript")
             when :subscript then Word::VerticalAlign.new("subscript")
+            when :caps then Word::CapitalLetters.new(value)
+            when :small_caps then Word::SmallCapitalLetters.new(value)
           end
         end
     end

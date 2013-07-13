@@ -40,3 +40,19 @@ describe DocxGenerator::Word::VerticalAlign do
     DocxGenerator::Word::VerticalAlign.new("superscript").to_s.should eq("<w:vertAlign w:val=\"superscript\" />")
   end
 end
+
+describe DocxGenerator::Word::CapitalLetters do
+  it "should render a w:caps element" do
+    DocxGenerator::Word::CapitalLetters.new.to_s.should eq("<w:caps />")
+    DocxGenerator::Word::CapitalLetters.new(true).to_s.should eq("<w:caps w:val=\"true\" />")
+    DocxGenerator::Word::CapitalLetters.new(false).to_s.should eq("<w:caps w:val=\"false\" />")
+  end
+end
+
+describe DocxGenerator::Word::SmallCapitalLetters do
+  it "should render a w:caps element" do
+    DocxGenerator::Word::SmallCapitalLetters.new.to_s.should eq("<w:smallCaps />")
+    DocxGenerator::Word::SmallCapitalLetters.new(true).to_s.should eq("<w:smallCaps w:val=\"true\" />")
+    DocxGenerator::Word::SmallCapitalLetters.new(false).to_s.should eq("<w:smallCaps w:val=\"false\" />")
+  end
+end

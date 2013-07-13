@@ -62,5 +62,25 @@ module DocxGenerator
         super("w:vertAlign", { "w:val" => value })
       end
     end
+
+    # Represent the `w:caps` element from Office Open XML specification. This class should not be used directly by the users of the library.
+    class CapitalLetters < Element
+      # Create a new `w:caps` element.
+      # @param present [Boolean] If the text should be displayed in capital letters.
+      def initialize(present = nil)
+        arguments = (present == nil ? {} : { "w:val" => present })
+        super("w:caps", arguments)
+      end
+    end
+
+    # Represent the `w:smallCaps` element from Office Open XML specification. This class should not be used directly by the users of the library.
+    class SmallCapitalLetters < Element
+      # Create a new `w:smallCaps` element.
+      # @param present [Boolean] If the text should be displayed in small capital letters.
+      def initialize(present = nil)
+        arguments = (present == nil ? {} : { "w:val" => present })
+        super("w:smallCaps", arguments)
+      end
+    end
   end
 end
