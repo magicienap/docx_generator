@@ -9,20 +9,8 @@ module DocxGenerator
         yield self if block
       end
       
-      # Could be better
       def save
-        content_types = generate_content_types
-        rels = generate_rels
-        document = generate_document
-        
-        File.delete(@filename) if File.exists?(@filename)
-        Zip::ZipFile.open(@filename, Zip::ZipFile::CREATE) do |docx|
-          docx.mkdir('_rels')
-          docx.mkdir('word')
-          docx.get_output_stream('[Content_Types].xml') { |f| f.puts content_types }
-          docx.get_output_stream('_rels/.rels') { |f| f.puts rels }
-          docx.get_output_stream('word/document.xml') { |f| f.puts document }
-        end
+        generate_archive(generate_content_types, generate_rels, generate_document)
       end
 
       def paragraph(options = {}, &block)
@@ -69,6 +57,17 @@ EOF
           '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
           Word::Document.new({ "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main" },
             [ Word::Body.new(content) ]).to_s
+        end
+
+        def generate_archive(content_types, rels, document)
+          File.delete(@filename) if File.exists?(@filename)
+          Zip::ZipFile.open(@filename, Zip::ZipFile::CREATE) do |docx|
+            docx.mkdir('_rels')
+            docx.mkdir('word')
+            docx.get_output_stream('[Content_Types].xml') { |f| f.puts content_types }
+            docx.get_output_stream('_rels/.rels') { |f| f.puts rels }
+            docx.get_output_stream('word/document.xml') { |f| f.puts document }
+          end
         end
     end
   end
