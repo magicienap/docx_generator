@@ -4,7 +4,7 @@ DocxGenerator::DSL::Document.new("basic_paragraph") do |doc|
   doc.paragraph do |par|
     par.alignment :center
     par.text "Title", underline: { style: "double" }, size: 20
-    par.newline
+    # par.newline
   end
 
   doc.paragraph do |par|

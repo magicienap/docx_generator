@@ -8,6 +8,9 @@ module DocxGenerator
       def self.newline
       	DocxGenerator::Word::Run.new({}, [DocxGenerator::Word::Break.new])
       end
+
+      class NoSpace
+      end
     end
   end
 end
