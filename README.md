@@ -6,37 +6,29 @@ A gem to generate docx files.
 
 Add this line to your application's Gemfile:
 
-    gem 'docx_generator'
+```ruby
+gem 'docx_generator'
+```
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install docx_generator
+```
+$ gem install docx_generator
+```
 
 ## Usage
 
-To create a new docx file and save it, just type:
+DocxGenerator can be used with blocks or without. See `examples/basic_document_with_block.rb` and `examples/basic_document_without_block.rb` for the basic usage.
 
-```ruby
-require 'docx_generator'
+## Documentation
 
-DocxGenerator::Document.new("filename").save # Will save the document to filename.docx
-```
-
-To create a paragraph and add formatted text to it:
-
-```ruby
-require 'docx_generator'
-
-document = DocxGenerator::Document.new("filename")
-document.add_paragraph("Simple string of text and", document.text("some formatted text", bold: true, italics: true)) # The fragments will be separated by a space when they will be rendered
-document.save
-```
-
-You can see more examples in the `examples` directory.
+The documentation can be found at [Rubydoc.info](http://rubydoc.info/github/magicienap/docx_generator/frames).
 
 ## Contributing
 
