@@ -27,7 +27,7 @@ DocxGenerator::DSL::Document.new("basic_paragraph") do |doc|
     par.text "How are you today?"
   end
 
-  doc.paragraph do |par|
+  doc.paragraph(alignment: :center) do |par|
     par.text "A simple chemical formula: CO"
     par.no_space
     par.text "2", subscript: true
