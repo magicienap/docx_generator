@@ -68,7 +68,7 @@ EOF
 
           '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
           Word::Document.new({ "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main" },
-            [ Word::Body.new({}, content) ]).to_s
+            [ Word::Body.new(content) ]).to_s
         end
     end
   end

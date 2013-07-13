@@ -58,7 +58,7 @@ module DocxGenerator
             @options.each do |option, value|
               parsed_options << parse_paragraph_option(option, value)
             end
-            Word::ParagraphProperties.new({}, parsed_options)
+            Word::ParagraphProperties.new(parsed_options)
           end
         end
 

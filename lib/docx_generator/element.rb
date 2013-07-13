@@ -1,6 +1,6 @@
 module DocxGenerator
 
-  # Represent an XML element. This class should not be used by the users of the library.
+  # Represent an XML element. This class should not be used directly by the users of the library.
   class Element
 
     # Create a new XML element.

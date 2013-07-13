@@ -11,7 +11,7 @@ end
 describe DocxGenerator::Word::Body do
   it "should render a w:body element" do
     DocxGenerator::Word::Body.new.to_s.should eq("<w:body />")
-    DocxGenerator::Word::Body.new({}, ["Text"]).to_s.should eq("<w:body>Text</w:body>")
+    DocxGenerator::Word::Body.new(["Text"]).to_s.should eq("<w:body>Text</w:body>")
   end
 end
 
@@ -25,7 +25,7 @@ end
 describe DocxGenerator::Word::ParagraphProperties do
   it "should render a w:pPr element" do
     DocxGenerator::Word::ParagraphProperties.new.to_s.should eq("<w:pPr />")
-    DocxGenerator::Word::ParagraphProperties.new({}, ["Text"]).to_s.should eq("<w:pPr>Text</w:pPr>")
+    DocxGenerator::Word::ParagraphProperties.new(["Text"]).to_s.should eq("<w:pPr>Text</w:pPr>")
   end
 end
 
@@ -39,7 +39,7 @@ end
 describe DocxGenerator::Word::RunProperties do
   it "should render a w:rPr element" do
     DocxGenerator::Word::RunProperties.new.to_s.should eq("<w:rPr />")
-    DocxGenerator::Word::RunProperties.new({}, ["Text"]).to_s.should eq("<w:rPr>Text</w:rPr>")
+    DocxGenerator::Word::RunProperties.new(["Text"]).to_s.should eq("<w:rPr>Text</w:rPr>")
   end
 end
 

@@ -52,7 +52,7 @@ module DocxGenerator
             @options.each do |option, value|
               parsed_options << parse_text_option(option, value)
             end
-            Word::RunProperties.new({}, parsed_options)
+            Word::RunProperties.new(parsed_options)
           end
         end
 

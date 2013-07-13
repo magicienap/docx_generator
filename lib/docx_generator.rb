@@ -4,5 +4,6 @@ require 'docx_generator/word'
 require 'docx_generator/dsl'
 require 'zip/zip'
 
+# Main module of the library.
 module DocxGenerator
 end
