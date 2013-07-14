@@ -37,8 +37,8 @@ end
 
 describe DocxGenerator::Word::Spacing do
   it "should render a w:spacing element" do
-    DocxGenerator::Word::Spacing.new(line: 1.15).to_s.should eq("<w:spacing w:line=\"276\" />")
-    DocxGenerator::Word::Spacing.new(before: 12, after: 12, line: 1.15).to_s.should eq("<w:spacing w:before=\"240\" w:after=\"240\" w:line=\"276\" />")
+    DocxGenerator::Word::Spacing.new(line: 1.15).to_s.should eq("<w:spacing w:line=\"276\" w:lineRule=\"auto\" />")
+    DocxGenerator::Word::Spacing.new(before: 12, after: 12, line: 1.15).to_s.should eq("<w:spacing w:before=\"240\" w:after=\"240\" w:line=\"276\" w:lineRule=\"auto\" />")
   end
 end
 

@@ -65,6 +65,7 @@ module DocxGenerator
             final_arguments["w:" + name.to_s] = (value * 20).round
           else
             final_arguments["w:" + name.to_s] = (value * 20 * 12).round
+            final_arguments["w:lineRule"] = "auto"
           end
         end
         super("w:spacing", final_arguments)
