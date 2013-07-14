@@ -8,7 +8,7 @@ DocxGenerator::DSL::Document.new("basic_paragraph") do |doc|
       t.size 20
       t.caps true
     end
-    # par.newline
+    par.newline
   end
 
   doc.paragraph do |par|

@@ -23,6 +23,11 @@ module DocxGenerator
         @objects << DocxGenerator::Word::Extensions::NoSpace.new
       end
 
+      # Add a newline
+      def newline
+        @objects << DocxGenerator::Word::Extensions::Newline.new
+      end
+
       # Add a new text fragment to the paragraph.
       # @param text_fragment [String] The text fragment.
       # @param options [Hash] Formatting options for the text fragment. See the full list in DocxGenerator::DSL::Text.
@@ -58,13 +63,16 @@ module DocxGenerator
         def generate_text_fragments
           text_fragments = []
           @objects.each do |object|
-            if object.respond_to?(:generate)
-              text_fragments << object.generate << Word::Extensions.space
-            elsif object.class == DocxGenerator::Word::Extensions::NoSpace
+            if object.class == DocxGenerator::Word::Extensions::NoSpace
               text_fragments.pop
+            elsif object.class == DocxGenerator::Word::Extensions::Newline
+              text_fragments.pop
+              text_fragments << object.generate
+            elsif object.respond_to?(:generate)
+              text_fragments << object.generate << Word::Extensions.space
             end
           end
-          text_fragments.pop # In order to remove the last space added
+          text_fragments.pop if text_fragments.last.to_s == Word::Extensions.space.to_s # In order to remove the last space added
           text_fragments
         end
 

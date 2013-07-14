@@ -9,7 +9,7 @@ describe DocxGenerator::Word::Extensions do
 
   describe "newline" do
     it "should render a newline" do
-      DocxGenerator::Word::Extensions.newline.to_s.should eq("<w:r><w:br /></w:r>")
+      DocxGenerator::Word::Extensions::Newline.new.generate.to_s.should eq("<w:r><w:br /></w:r>")
     end
   end
 end

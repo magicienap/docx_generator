@@ -49,6 +49,18 @@ describe DocxGenerator::DSL::Paragraph do
       paragraph.generate.to_s.should eq("<w:p><w:r><w:t>CO</w:t></w:r><w:r><w:t>2</w:t></w:r></w:p>")
     end
 
+    it "should add a newline when it encouters a Newline object" do
+      paragraph = DocxGenerator::DSL::Paragraph.new.add(DocxGenerator::DSL::Text.new("CO"), DocxGenerator::Word::Extensions::Newline.new, DocxGenerator::DSL::Text.new("2"))
+      paragraph.generate.to_s.should eq("<w:p><w:r><w:t>CO</w:t></w:r><w:r><w:br /></w:r><w:r><w:t>2</w:t></w:r></w:p>")
+
+      paragraph = DocxGenerator::DSL::Paragraph.new do |p|
+        p.text "CO"
+        p.newline
+        p.text "2"
+      end
+      paragraph.generate.to_s.should eq("<w:p><w:r><w:t>CO</w:t></w:r><w:r><w:br /></w:r><w:r><w:t>2</w:t></w:r></w:p>")
+    end
+
     context "with styles" do
       it "should align the paragraph" do
         DocxGenerator::DSL::Paragraph.new(alignment: "center").add(DocxGenerator::DSL::Text.new("The first characters"), DocxGenerator::DSL::Text.new("and the last ones.")).generate.to_s.should eq("<w:p><w:pPr><w:jc w:val=\"center\" /></w:pPr><w:r><w:t>The first characters</w:t></w:r><w:r><w:t xml:space=\"preserve\"> </w:t></w:r><w:r><w:t>and the last ones.</w:t></w:r></w:p>")

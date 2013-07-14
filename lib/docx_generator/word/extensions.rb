@@ -11,6 +11,12 @@ module DocxGenerator
       	DocxGenerator::Word::Run.new({}, [DocxGenerator::Word::Break.new])
       end
 
+      class Newline
+        def generate
+          DocxGenerator::Word::Run.new({}, [DocxGenerator::Word::Break.new]) 
+        end
+      end
+
       class NoSpace
       end
     end
