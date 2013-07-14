@@ -9,7 +9,7 @@ module DocxGenerator
         super("w:b", arguments)
       end
     end
-    
+
     # Represent the `w:i` element from Office Open XML specification. This class should not be used directly by the users of the library.
     class Italics < Element
       # Create a new `w:i` element.
@@ -69,6 +69,23 @@ module DocxGenerator
           end
         end
         super("w:spacing", final_arguments)
+      end
+    end
+
+    # Represent the `w:indent` element from Office Open XML specification. This class should not be used directly by the users of the library.
+    class Indentation < Element
+      # Create a new `w:indent` element.
+      # @param properties [Hash] The different properties for the indentation. They can be found in the specification.
+      def initialize(arguments = {})
+        final_arguments = {}
+        arguments.each do |name, value|
+          if name.to_s == "first_line"
+            final_arguments["w:firstLine"] = (value * 20).round
+          else
+            final_arguments["w:" + name.to_s] = (value * 20).round
+          end
+        end
+        super("w:ind", final_arguments)
       end
     end
 

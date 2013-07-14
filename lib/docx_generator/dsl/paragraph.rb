@@ -7,6 +7,7 @@ module DocxGenerator
       # @param options [Hash] Formatting options.
       # @option options [Boolean] alignment The alignment of the paragraph. See the specification for the complete list.
       # @option options [Hash] spacing Various spacing options for the paragraph. See the specification for more details.
+      # @option options [Hash] indentation Various indentation properties for the paragraph. See the specification for more details.
       def initialize(options = {}, &block)
         @objects = []
         @options = options
@@ -23,6 +24,12 @@ module DocxGenerator
       # @param options [Hash] Various spacing options for the paragraph. See the specification for more details.
       def spacing(options)
         @options[:spacing] = options
+      end
+
+      # Set various indentation properties for the paragraph. See the specification for more details.
+      # @param options [Hash] Various indentation properties for the paragraph. See the specification for more details.
+      def indentation(properties)
+        @options[:indentation] = properties
       end
 
       # Prevent the addition of a space between two text fragments.
@@ -97,6 +104,7 @@ module DocxGenerator
           case option
             when :alignment then Word::Alignment.new(value)
             when :spacing then Word::Spacing.new(value)
+            when :indentation then Word::Indentation.new(value)
           end
         end
     end

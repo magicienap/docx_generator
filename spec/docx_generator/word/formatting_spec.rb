@@ -42,6 +42,13 @@ describe DocxGenerator::Word::Spacing do
   end
 end
 
+describe DocxGenerator::Word::Indentation do
+  it "should render a w:spacing element" do
+    DocxGenerator::Word::Indentation.new(start: 20, end: 20, first_line: 20).to_s.should eq("<w:ind w:start=\"400\" w:end=\"400\" w:firstLine=\"400\" />")
+    DocxGenerator::Word::Indentation.new(start: 20, end: 20, hanging: 20).to_s.should eq("<w:ind w:start=\"400\" w:end=\"400\" w:hanging=\"400\" />")
+  end
+end
+
 describe DocxGenerator::Word::VerticalAlign do
   it "should render a w:vertAlign element" do
     DocxGenerator::Word::VerticalAlign.new("superscript").to_s.should eq("<w:vertAlign w:val=\"superscript\" />")
