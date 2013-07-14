@@ -6,6 +6,7 @@ module DocxGenerator
       # The formatting properties can be passed with a Hash or they could be set by calling the methods on the object (either in the block or not).
       # @param options [Hash] Formatting options.
       # @option options [Boolean] alignment The alignment of the paragraph. See the specification for the complete list.
+      # @option options [Hash] spacing Various spacing options for the paragraph. See the specification for more details.
       def initialize(options = {}, &block)
         @objects = []
         @options = options
@@ -16,6 +17,12 @@ module DocxGenerator
       # @param value [String] The alignment of the paragraph. See the specification for the complete list.
       def alignment(value)
         @options[:alignment] = value
+      end
+
+      # Set various spacing options for the paragraph. See the specification for more details.
+      # @param options [Hash] Various spacing options for the paragraph. See the specification for more details.
+      def spacing(options)
+        @options[:spacing] = options
       end
 
       # Prevent the addition of a space between two text fragments.
@@ -89,6 +96,7 @@ module DocxGenerator
         def parse_paragraph_option(option, value)
           case option
             when :alignment then Word::Alignment.new(value)
+            when :spacing then Word::Spacing.new(value)
           end
         end
     end

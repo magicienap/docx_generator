@@ -35,6 +35,13 @@ describe DocxGenerator::Word::Alignment do
   end
 end
 
+describe DocxGenerator::Word::Spacing do
+  it "should render a w:spacing element" do
+    DocxGenerator::Word::Spacing.new(lines: 1.15).to_s.should eq("<w:spacing w:lines=\"276\" />")
+    DocxGenerator::Word::Spacing.new(before: 12, after: 12, lines: 1.15).to_s.should eq("<w:spacing w:before=\"240\" w:after=\"240\" w:lines=\"276\" />")
+  end
+end
+
 describe DocxGenerator::Word::VerticalAlign do
   it "should render a w:vertAlign element" do
     DocxGenerator::Word::VerticalAlign.new("superscript").to_s.should eq("<w:vertAlign w:val=\"superscript\" />")

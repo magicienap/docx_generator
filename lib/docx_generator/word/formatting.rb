@@ -54,6 +54,23 @@ module DocxGenerator
       end
     end
 
+    # Represent the `w:spacing` element from Office Open XML specification. This class should not be used directly by the users of the library.
+    class Spacing < Element
+      # Create a new `w:spacing` element.
+      # @param arguments [Hash] The different options for the spacing. They can be found in the specification.
+      def initialize(arguments = {})
+        final_arguments = {}
+        arguments.each do |name, value|
+          if name.to_s == "after" || name.to_s == "before"
+            final_arguments["w:" + name.to_s] = (value * 20).round
+          else
+            final_arguments["w:" + name.to_s] = (value * 20 * 12).round
+          end
+        end
+        super("w:spacing", final_arguments)
+      end
+    end
+
     # Represent the `w:vertAlign` element from Office Open XML specification. This class should not be used directly by the users of the library.
     class VerticalAlign < Element
       # Create a new `w:vertAlign` element.
