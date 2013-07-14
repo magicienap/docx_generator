@@ -73,6 +73,12 @@ describe DocxGenerator::DSL::Text do
         DocxGenerator::DSL::Text.new("Text", dstrike: true).generate.to_s.should eq("<w:r><w:rPr><w:dstrike w:val=\"true\" /></w:rPr><w:t>Text</w:t></w:r>")
         (DocxGenerator::DSL::Text.new("Text") { |t| t.dstrike true }).generate.to_s.should eq("<w:r><w:rPr><w:dstrike w:val=\"true\" /></w:rPr><w:t>Text</w:t></w:r>")
       end
+
+      it "should render the name of the font" do
+        result = "<w:r><w:rPr><w:rFonts w:ascii=\"Arial\" /></w:rPr><w:t>Text</w:t></w:r>"
+        DocxGenerator::DSL::Text.new("Text", font: "Arial").generate.to_s.should eq(result)
+        (DocxGenerator::DSL::Text.new("Text") { |t| t.font "Arial" }).generate.to_s.should eq(result)
+      end
     end
   end
 

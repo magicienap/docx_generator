@@ -117,5 +117,14 @@ module DocxGenerator
         super("w:smallCaps", arguments)
       end
     end
+
+    # Represent the `w:rFonts` element from Office Open XML specification. This class should not be used directly by the users of the library.
+    class Font < Element
+      # Create a new `w:rFonts` element.
+      # @param name [String] The name of the font.
+      def initialize(name)
+        super("w:rFonts", { "w:ascii" => name })
+      end
+    end
   end
 end

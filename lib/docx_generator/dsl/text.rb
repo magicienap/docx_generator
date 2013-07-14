@@ -14,6 +14,7 @@ module DocxGenerator
       # @option options [Boolean] subscript If the text should be in subscript.
       # @option options [Boolean] caps If the text should be displayed in capital letters.
       # @option options [Boolean] small_caps If the text should be displayed in small capital letters.
+      # @option options [String] font The name of the font.
       def initialize(text_fragment, options = {}, &block)
         @text_fragment = text_fragment
         @options = options
@@ -68,6 +69,12 @@ module DocxGenerator
         @options[:small_caps] = value
       end
 
+      # Set the name of the font.
+      # @param value [String] The name of the font
+      def font(value)
+        @options[:font] = value
+      end
+
       # Generate the XML element objects.
       # @return [DocxGenerator::Word::Run] A Word::Run object representing the text fragment.
       def generate
@@ -106,6 +113,7 @@ module DocxGenerator
             when :subscript then Word::VerticalAlign.new("subscript")
             when :caps then Word::CapitalLetters.new(value)
             when :small_caps then Word::SmallCapitalLetters.new(value)
+            when :font then Word::Font.new(value)
           end
         end
     end

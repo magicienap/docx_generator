@@ -70,3 +70,9 @@ describe DocxGenerator::Word::SmallCapitalLetters do
     DocxGenerator::Word::SmallCapitalLetters.new(false).to_s.should eq("<w:smallCaps w:val=\"false\" />")
   end
 end
+
+describe DocxGenerator::Word::Font do
+  it "should render a w:rFonts element" do
+    DocxGenerator::Word::Font.new("Trebuchet MS").to_s.should eq("<w:rFonts w:ascii=\"Trebuchet MS\" />")
+  end
+end
