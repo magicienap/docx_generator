@@ -89,6 +89,35 @@ module DocxGenerator
       end
     end
 
+    # Represent the `w:tabs` element from Office Open XML specification. This class should not be used directly by the users of the library.
+    class Tabs < Element
+      # Create a new `w:tabs` element.
+      # @param tab_stops [Array] The tab stops.
+      def initialize(tab_stops)
+        tab_stop_elements = tab_stops.inject([]) do |tab_stop_elements, tab_stop|
+          tab_stop_elements << Tab.new(tab_stop)
+        end
+        super("w:tabs", {}, tab_stop_elements)
+      end
+    end
+
+    # Represent the `w:tab` element from Office Open XML specification. This class should not be used directly by the users of the library.
+    class Tab < Element
+      # Create a new `w:tab` element.
+      # @param options [Hash] Options for the tab stop. Must be `leader`, `pos` or `val`. See the specification for the possible values for each option.
+      def initialize(options)
+        final_arguments = {}
+        options.each do |name, value|
+          if name.to_s == "pos"
+            final_arguments["w:pos"] = (value * 20).round
+          else
+            final_arguments["w:" + name.to_s] = value
+          end
+        end
+        super("w:tab", final_arguments)
+      end
+    end
+
     # Represent the `w:vertAlign` element from Office Open XML specification. This class should not be used directly by the users of the library.
     class VerticalAlign < Element
       # Create a new `w:vertAlign` element.

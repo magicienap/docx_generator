@@ -79,6 +79,13 @@ describe DocxGenerator::DSL::Paragraph do
         DocxGenerator::DSL::Paragraph.new(indentation: { start: 20, end: 20, hanging: 20 }).add(DocxGenerator::DSL::Text.new("The first characters"), DocxGenerator::DSL::Text.new("and the last ones.")).generate.to_s.should eq("<w:p><w:pPr><w:ind w:start=\"400\" w:end=\"400\" w:hanging=\"400\" /></w:pPr><w:r><w:t>The first characters</w:t></w:r><w:r><w:t xml:space=\"preserve\"> </w:t></w:r><w:r><w:t>and the last ones.</w:t></w:r></w:p>")
         (DocxGenerator::DSL::Paragraph.new { |p| p.indentation start: 20, end: 20, hanging: 20 }).add(DocxGenerator::DSL::Text.new("The first characters"), DocxGenerator::DSL::Text.new("and the last ones.")).generate.to_s.should eq("<w:p><w:pPr><w:ind w:start=\"400\" w:end=\"400\" w:hanging=\"400\" /></w:pPr><w:r><w:t>The first characters</w:t></w:r><w:r><w:t xml:space=\"preserve\"> </w:t></w:r><w:r><w:t>and the last ones.</w:t></w:r></w:p>")
       end
+
+      it "should add tabulations" do
+        result = "<w:p><w:pPr><w:tabs><w:tab w:leader=\"dot\" w:pos=\"1440\" w:val=\"end\" /><w:tab w:leader=\"underscore\" w:pos=\"2880\" w:val=\"start\" /></w:tabs></w:pPr><w:r><w:t>The first characters</w:t></w:r><w:r><w:t xml:space=\"preserve\"> </w:t></w:r><w:r><w:t>and the last ones.</w:t></w:r></w:p>"
+        text_fragments = [DocxGenerator::DSL::Text.new("The first characters"), DocxGenerator::DSL::Text.new("and the last ones.")]
+        DocxGenerator::DSL::Paragraph.new(tabs: [{ leader: "dot", pos: 72, val: "end" }, { leader: "underscore", pos: 144, val: "start" }]).add(*text_fragments).generate.to_s.should eq(result)
+        (DocxGenerator::DSL::Paragraph.new { |p| p.tabs [{ leader: "dot", pos: 72, val: "end" }, { leader: "underscore", pos: 144, val: "start" }] }).add(*text_fragments).generate.to_s.should eq(result)
+      end
     end
   end
 

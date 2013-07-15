@@ -49,6 +49,18 @@ describe DocxGenerator::Word::Indentation do
   end
 end
 
+describe DocxGenerator::Word::Tabs do
+  it "should render a w:tabs element" do
+    DocxGenerator::Word::Tabs.new([{ leader: "dot", pos: 72, val: "end" }, { leader: "underscore", pos: 144, val: "start" }]).to_s.should eq(%q[<w:tabs><w:tab w:leader="dot" w:pos="1440" w:val="end" /><w:tab w:leader="underscore" w:pos="2880" w:val="start" /></w:tabs>])
+  end
+end
+
+describe DocxGenerator::Word::Tab do
+  it "should render a w:tab element" do
+    DocxGenerator::Word::Tab.new({ leader: "dot", pos: 72, val: "end" }).to_s.should eq(%q[<w:tab w:leader="dot" w:pos="1440" w:val="end" />])
+  end
+end
+
 describe DocxGenerator::Word::VerticalAlign do
   it "should render a w:vertAlign element" do
     DocxGenerator::Word::VerticalAlign.new("superscript").to_s.should eq("<w:vertAlign w:val=\"superscript\" />")
