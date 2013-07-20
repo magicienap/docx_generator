@@ -72,7 +72,26 @@ class WordBase < Thor
 
   desc "spec", "Generate the tests."
   def spec
+    code  = "require 'spec_helper'\n\n"
 
+    @@elements.each do |element|
+      element = normalize(element)
+
+      code += "describe DocxGenerator::Word::#{element[:class]} do\n" +
+              "  it \"should render a #{element[:element]} element\" do\n"
+
+      code += "    DocxGenerator::Word::#{element[:class]}.new.to_s.should eq('<#{element[:element]} />')\n"
+      if element[:content]
+        code += "    DocxGenerator::Word::#{element[:class]}.new("
+        code += "{}, " if element[:attributes]
+        code += "[\"Text\"]).to_s.should eq('<#{element[:element]}>Text</#{element[:element]}>')\n"
+      end
+
+      code += "  end\n" +
+              "end\n\n"
+    end
+
+    create_file "spec/docx_generator/word/base_spec.rb", code
   end
 
   private
