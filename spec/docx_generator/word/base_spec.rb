@@ -4,7 +4,6 @@ describe DocxGenerator::Word::Document do
   it "should render a w:document element" do
     DocxGenerator::Word::Document.new.to_s.should eq("<w:document />")
     DocxGenerator::Word::Document.new({}, ["Text"]).to_s.should eq("<w:document>Text</w:document>")
-    DocxGenerator::Word::Document.new({ "w:conformance" => "strict" }, ["Text"]).to_s.should eq("<w:document w:conformance=\"strict\">Text</w:document>")
   end
 end
 
