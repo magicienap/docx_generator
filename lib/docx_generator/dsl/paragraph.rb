@@ -49,6 +49,11 @@ module DocxGenerator
         @objects << DocxGenerator::Word::Extensions::Newline.new
       end
 
+      # Add a tabulation
+      def tab
+        @objects << DocxGenerator::Word::Tab.new
+      end
+
       # Add a new text fragment to the paragraph.
       # @param text_fragment [String] The text fragment.
       # @param options [Hash] Formatting options for the text fragment. See the full list in DocxGenerator::DSL::Text.

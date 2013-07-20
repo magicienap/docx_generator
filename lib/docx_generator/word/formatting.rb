@@ -105,7 +105,7 @@ module DocxGenerator
     class Tab < Element
       # Create a new `w:tab` element.
       # @param options [Hash] Options for the tab stop. Must be `leader`, `pos` or `val`. See the specification for the possible values for each option.
-      def initialize(options)
+      def initialize(options = {})
         final_arguments = {}
         options.each do |name, value|
           if name.to_s == "pos"

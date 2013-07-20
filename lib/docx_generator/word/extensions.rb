@@ -13,7 +13,13 @@ module DocxGenerator
 
       class Newline
         def generate
-          DocxGenerator::Word::Run.new({}, [DocxGenerator::Word::Break.new]) 
+          DocxGenerator::Word::Run.new({}, [DocxGenerator::Word::Break.new])
+        end
+      end
+
+      class Tab
+        def generate
+          DocxGenerator::Word::Run.new({}, [DocxGenerator::Word::Tab.new])
         end
       end
 
