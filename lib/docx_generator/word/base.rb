@@ -1,3 +1,6 @@
+# Warning: This file has been automatically generated from generator/word_base.rb.
+# It should not be edited by hand. Instead, modify the code generator.
+
 module DocxGenerator
   module Word
     # Represent the `w:document` element from Office Open XML specification. This class should not be used directly by the users of the library.
@@ -75,5 +78,6 @@ module DocxGenerator
         super("w:br", attributes)
       end
     end
+
   end
 end
