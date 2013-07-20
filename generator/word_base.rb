@@ -1,4 +1,5 @@
-# I should test my code generator
+# I should test my code generator!
+# I should use Thor!
 
 # Data structure
 # An array of elements
@@ -30,7 +31,7 @@ def normalize(element)
 end
 
 # Change that to be a template (ERB?) with helpers
-file =  "# Warning: This file has been automatically generated from generator/word_base.rb.\n" +
+code =  "# Warning: This file has been automatically generated from generator/word_base.rb.\n" +
         "# It should not be edited by hand. Instead, modify the code generator.\n" +
         "\n" +
         "module DocxGenerator\n" +
@@ -39,36 +40,39 @@ file =  "# Warning: This file has been automatically generated from generator/wo
 elements.each do |element|
   element = normalize(element)
 
-  file += "    # Represent the `#{element[:element]}` element from Office Open XML specification. This class should not be used directly by the users of the library.\n" +
+  code += "    # Represent the `#{element[:element]}` element from Office Open XML specification. This class should not be used directly by the users of the library.\n" +
           "    class #{element[:class]} < Element\n" +
           "      # Create a new `#{element[:element]}` XML element.\n"
 
   if element[:attributes]
-    file += "      # @param attributes [Hash] The attributes of the XML element. Check the specification of the `#{element[:element]}` element for the possible attributes.\n"
+    code += "      # @param attributes [Hash] The attributes of the XML element. Check the specification of the `#{element[:element]}` element for the possible attributes.\n"
   end
   if element[:content]
-    file += "      # @param content [Array] An array of the children of the XML element (other XML elements).\n"
+    code += "      # @param content [Array] An array of the children of the XML element (other XML elements).\n"
   end
 
-  file += "      def initialize("
-  file += "attributes = {}" if element[:attributes]
-  file += ", " if element[:attributes] && element[:content]
-  file += "content = []" if element[:content]
-  file += ")\n"
+  code += "      def initialize("
+  code += "attributes = {}" if element[:attributes]
+  code += ", " if element[:attributes] && element[:content]
+  code += "content = []" if element[:content]
+  code += ")\n"
 
-  file += "        super(\"#{element[:element]}\""
-  file += element[:attributes] ? ", attributes" : ", {}"
-  file += ", content" if element[:content]
-  file += ")\n"
-  file += "      end\n"
+  code += "        super(\"#{element[:element]}\""
+  code += element[:attributes] ? ", attributes" : ", {}"
+  code += ", content" if element[:content]
+  code += ")\n"
+  code += "      end\n"
 
-  file += "    end\n\n"
+  code += "    end\n\n"
 end
 
-file += "  end\n"
-file += "end"
+code += "  end\n"
+code += "end"
 
 # Save the file
 File.open("lib/docx_generator/word/base.rb", "w") do |content|
-  content.puts file
+  content.puts code
 end
+
+# Génération des tests
+# spec

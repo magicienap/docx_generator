@@ -1,3 +1,6 @@
+# This file should be standarized. All the parameters should be named parameters (or maybe only those who take a Hash).
+# All they do is arguments tranformations and they document possible arguments from the specification.
+
 module DocxGenerator
   module Word
     # Represent the `w:b` element from Office Open XML specification. This class should not be used directly by the users of the library.
