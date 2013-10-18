@@ -71,7 +71,7 @@ EOF
 
         def generate_archive(content_types, rels, document)
           File.delete(@filename) if File.exists?(@filename)
-          Zip::ZipFile.open(@filename, Zip::ZipFile::CREATE) do |docx|
+          Zip::File.open(@filename, Zip::File::CREATE) do |docx|
             docx.mkdir('_rels')
             docx.mkdir('word')
             docx.get_output_stream('[Content_Types].xml') { |f| f.puts content_types }

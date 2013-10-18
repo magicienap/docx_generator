@@ -30,19 +30,19 @@ describe DocxGenerator::DSL::Document do
       before { DocxGenerator::DSL::Document.new("word").save }
     
       it "should generate a [Content_Types].xml file" do
-        Zip::ZipFile.open("word.docx") do |docx|
+        Zip::File.open("word.docx") do |docx|
           expect { docx.read("[Content_Types].xml") }.to_not raise_error
         end
       end
       
       it "should generate a _rels/.rels file" do
-        Zip::ZipFile.open("word.docx") do |docx|
+        Zip::File.open("word.docx") do |docx|
           expect { docx.read("_rels/.rels") }.to_not raise_error
         end
       end
       
       it "should generate a word/document.xml" do
-        Zip::ZipFile.open("word.docx") do |docx|
+        Zip::File.open("word.docx") do |docx|
           expect { docx.read("word/document.xml") }.to_not raise_error
         end
       end
